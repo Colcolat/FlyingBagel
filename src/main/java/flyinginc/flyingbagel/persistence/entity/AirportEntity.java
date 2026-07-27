@@ -31,8 +31,9 @@ public class AirportEntity {
     @Column(name = "terminals")
     private Integer terminals;
 
-    @OneToMany(mappedBy = "airport", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AirportEntity> airlines = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "airport_id")
+    private List<AirlineEntity> airlines = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -66,11 +67,11 @@ public class AirportEntity {
         this.terminals = terminals;
     }
 
-    public List<AirportEntity> getAirlines() {
+    public List<AirlineEntity> getAirlines() {
         return airlines;
     }
 
-    public void setAirlines(List<AirportEntity> airlines) {
+    public void setAirlines(List<AirlineEntity> airlines) {
         this.airlines = airlines;
     }
 }
