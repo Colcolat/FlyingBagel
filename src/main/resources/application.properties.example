@@ -1,9 +1,9 @@
 spring.application.name=FlyingBagel
 
-# Configuración de base de datos (Reemplazar con tus credenciales locales o variables de entorno)
+# Configuración de base de datos 
 spring.datasource.url=jdbc:postgresql://localhost:5432/FlyingBagel
 spring.datasource.username=${DB_USERNAME:postgres}
-spring.datasource.password=${DB_PASSWORD:tu_password_aqui}
+spring.datasource.password=${DB_PASSWORD:tu_password}
 spring.datasource.driver-class-name=org.postgresql.Driver
 
 # JPA / Hibernate
