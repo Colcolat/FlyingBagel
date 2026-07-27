@@ -38,7 +38,6 @@ public class FlightEntity {
 
     public FlightEntity() {}
 
-
     public Integer getId() {
         return id;
     }

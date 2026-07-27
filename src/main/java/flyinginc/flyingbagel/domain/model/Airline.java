@@ -46,11 +46,11 @@ public class Airline {
         this.region = region;
     }
 
-    public Boolean getInternational() {
+    public Boolean getIsInternational() {
         return isInternational;
     }
 
-    public void setInternational(Boolean international) {
+    public void setIsInternational(Boolean international) {
         isInternational = international;
     }
 

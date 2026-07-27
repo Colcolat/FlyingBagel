@@ -10,7 +10,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface FlightMapper {
 
-
     @Mapping(source = "airline.id", target = "airlineId")
     @Mapping(source = "airline.name", target = "airlineName")
     Flight toDomain(FlightEntity entity);
@@ -20,4 +19,5 @@ public interface FlightMapper {
     FlightEntity toEntity(Flight domain);
 
     List<Flight> toDomainList(List<FlightEntity> entities);
+    
 }
