@@ -2,6 +2,7 @@ package flyinginc.flyingbagel.web.controller;
 
 import flyinginc.flyingbagel.domain.model.Flight;
 import flyinginc.flyingbagel.service.FlightService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,18 +20,24 @@ public class FlightController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @Operation(description = "Create a new flight")
     public ResponseEntity<Flight> create(@RequestBody Flight flight) {
-        return flightService.save(flight)
-                .map(created -> ResponseEntity.status(HttpStatus.CREATED).body(created))
-                .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+        Flight created = flightService.save(flight).orElse(null);
+        return ResponseEntity.ok(created);
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(description = "Get all flights")
     public ResponseEntity<List<Flight>> getAll() {
-        return ResponseEntity.ok(flightService.findAll());
+        List<Flight> flights = flightService.findAll();
+        return ResponseEntity.ok(flights);
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(description = "Get a flight by ID")
     public ResponseEntity<Flight> getById(@PathVariable Integer id) {
         return flightService.findById(id)
                 .map(ResponseEntity::ok)
@@ -38,10 +45,10 @@ public class FlightController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(description = "Delete a flight by ID")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        if (flightService.deleteById(id)) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        flightService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

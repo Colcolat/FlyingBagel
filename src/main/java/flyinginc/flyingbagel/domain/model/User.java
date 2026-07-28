@@ -1,13 +1,17 @@
 package flyinginc.flyingbagel.domain.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.ArrayList;
 
 public class User {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer id;
     private String name;
     private String email;
     private String password;
     private Boolean isPremium;
+    @JsonIgnore
     private List<Flight> flights = new ArrayList<>();
 
     // Getters and setters

@@ -1,8 +1,10 @@
 package flyinginc.flyingbagel.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 
 public class Flight {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer id;
     private String flightNumber;
     private String origin;

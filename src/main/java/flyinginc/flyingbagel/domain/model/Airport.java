@@ -1,13 +1,17 @@
 package flyinginc.flyingbagel.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Airport {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer id;
     private String name;
     private String code;
     private Integer terminals;
+    @JsonIgnore
     private List<Airline> airlines = new ArrayList<>();
 
     public Integer getId() {

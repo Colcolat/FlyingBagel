@@ -1,15 +1,19 @@
 package flyinginc.flyingbagel.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Airline {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer id;
     private String name;
     private String iataCode;
     private String region;
     private Boolean isInternational;
     private String requiredDocument;
+    @JsonIgnore
     private List<Flight> flights = new ArrayList<>();
 
     public Airline() {}
