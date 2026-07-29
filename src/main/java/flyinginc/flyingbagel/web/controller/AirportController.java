@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/airports")
@@ -20,11 +21,10 @@ public class AirportController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     @Operation(description = "Create a new airport")
     public ResponseEntity<Airport> create(@RequestBody Airport airport) {
         Airport created = airportService.save(airport);
-        return ResponseEntity.ok(created);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @GetMapping
@@ -45,10 +45,12 @@ public class AirportController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(description = "Delete an airport by ID")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        airportService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Map<String, String>> delete(@PathVariable Integer id) {
+        if (airportService.deleteById(id)) {
+            return ResponseEntity.ok(Map.of("message", "Airport with ID " + id + " was successfully deleted."));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("error", "No airport found with ID " + id));
     }
 }

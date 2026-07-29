@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/airlines")
@@ -20,11 +21,10 @@ public class AirlineController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     @Operation(description = "Create a new airline")
     public ResponseEntity<Airline> create(@RequestBody Airline airline) {
         Airline created = airlineService.save(airline);
-        return ResponseEntity.ok(created);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
     @GetMapping
@@ -45,10 +45,12 @@ public class AirlineController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(description = "Delete an airline by ID")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        airlineService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Map<String, String>> delete(@PathVariable Integer id) {
+        if (airlineService.deleteById(id)) {
+            return ResponseEntity.ok(Map.of("message", "Airline with ID " + id + " was successfully deleted."));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("error", "No airline found with ID " + id));
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/flights")
@@ -20,11 +21,11 @@ public class FlightController {
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     @Operation(description = "Create a new flight")
     public ResponseEntity<Flight> create(@RequestBody Flight flight) {
-        Flight created = flightService.save(flight).orElse(null);
-        return ResponseEntity.ok(created);
+        return flightService.save(flight)
+                .map(created -> ResponseEntity.status(HttpStatus.CREATED).body(created))
+                .orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
     }
 
     @GetMapping
@@ -45,10 +46,12 @@ public class FlightController {
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(description = "Delete a flight by ID")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        flightService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Map<String, String>> delete(@PathVariable Integer id) {
+        if (flightService.deleteById(id)) {
+            return ResponseEntity.ok(Map.of("message", "Flight with ID " + id + " was successfully deleted."));
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Map.of("error", "No flight found with ID " + id));
     }
 }
