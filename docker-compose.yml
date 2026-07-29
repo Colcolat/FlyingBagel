@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: flyingbagel-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 2931
+      POSTGRES_DB: FlyingBagel
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: flyingbagel-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/FlyingBagel
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=2931
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+volumes:
+  postgres_data:
