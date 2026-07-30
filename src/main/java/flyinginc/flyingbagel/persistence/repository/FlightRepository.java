@@ -6,5 +6,5 @@ import flyinginc.flyingbagel.persistence.entity.FlightEntity;
 
 @Repository
 public interface FlightRepository extends JpaRepository<FlightEntity, Integer> {
-    //TODO: Add missing methods
+
 }

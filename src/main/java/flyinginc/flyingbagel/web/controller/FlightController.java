@@ -21,7 +21,7 @@ public class FlightController {
     }
 
     @PostMapping
-    @Operation(description = "Create a new flight")
+    @Operation(summary = "Create Flight", description = "Create a new flight")
     public ResponseEntity<Flight> create(@RequestBody Flight flight) {
         return flightService.save(flight)
                 .map(created -> ResponseEntity.status(HttpStatus.CREATED).body(created))
@@ -30,7 +30,7 @@ public class FlightController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @Operation(description = "Get all flights")
+    @Operation(summary = "Get All Flights", description = "Retrieve a list of all scheduled flights")
     public ResponseEntity<List<Flight>> getAll() {
         List<Flight> flights = flightService.findAll();
         return ResponseEntity.ok(flights);
@@ -38,7 +38,7 @@ public class FlightController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(description = "Get a flight by ID")
+    @Operation(summary = "Get Flight by ID", description = "Retrieve a specific flight by its unique ID")
     public ResponseEntity<Flight> getById(@PathVariable Integer id) {
         return flightService.findById(id)
                 .map(ResponseEntity::ok)
@@ -46,7 +46,7 @@ public class FlightController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(description = "Delete a flight by ID")
+    @Operation(summary = "Delete Flight", description = "Delete a flight by its unique ID")
     public ResponseEntity<Map<String, String>> delete(@PathVariable Integer id) {
         if (flightService.deleteById(id)) {
             return ResponseEntity.ok(Map.of("message", "Flight with ID " + id + " was successfully deleted."));

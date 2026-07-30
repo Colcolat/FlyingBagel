@@ -21,7 +21,7 @@ public class AirlineController {
     }
 
     @PostMapping
-    @Operation(summary ="Hola Mundo!", description = "Create a new airline")
+    @Operation(summary = "Create Airline", description = "Create a new airline")
     public ResponseEntity<Airline> create(@RequestBody Airline airline) {
         Airline created = airlineService.save(airline);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
@@ -29,7 +29,7 @@ public class AirlineController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @Operation(description = "Get all airlines")
+    @Operation(summary = "Get All Airlines", description = "Retrieve a list of all available airlines")
     public ResponseEntity<List<Airline>> getAll() {
         List<Airline> airlines = airlineService.findAll();
         return ResponseEntity.ok(airlines);
@@ -37,7 +37,7 @@ public class AirlineController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(description = "Get an airline by ID")
+    @Operation(summary = "Get Airline by ID", description = "Retrieve a specific airline by its unique ID")
     public ResponseEntity<Airline> getById(@PathVariable Integer id) {
         return airlineService.findById(id)
                 .map(ResponseEntity::ok)
@@ -45,7 +45,7 @@ public class AirlineController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(description = "Delete an airline by ID")
+    @Operation(summary = "Delete Airline", description = "Delete an airline by its unique ID")
     public ResponseEntity<Map<String, String>> delete(@PathVariable Integer id) {
         if (airlineService.deleteById(id)) {
             return ResponseEntity.ok(Map.of("message", "Airline with ID " + id + " was successfully deleted."));

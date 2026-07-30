@@ -21,7 +21,7 @@ public class AirportController {
     }
 
     @PostMapping
-    @Operation(description = "Create a new airport")
+    @Operation(summary = "Create Airport", description = "Create a new airport")
     public ResponseEntity<Airport> create(@RequestBody Airport airport) {
         Airport created = airportService.save(airport);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
@@ -29,7 +29,7 @@ public class AirportController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @Operation(description = "Get all airports")
+    @Operation(summary = "Get All Airports", description = "Retrieve a list of all available airports")
     public ResponseEntity<List<Airport>> getAll() {
         List<Airport> airports = airportService.findAll();
         return ResponseEntity.ok(airports);
@@ -37,7 +37,7 @@ public class AirportController {
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(description = "Get an airport by ID")
+    @Operation(summary = "Get Airport by ID", description = "Retrieve a specific airport by its unique ID")
     public ResponseEntity<Airport> getById(@PathVariable Integer id) {
         return airportService.findById(id)
                 .map(ResponseEntity::ok)
@@ -45,7 +45,7 @@ public class AirportController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(description = "Delete an airport by ID")
+    @Operation(summary = "Delete Airport", description = "Delete an airport by its unique ID")
     public ResponseEntity<Map<String, String>> delete(@PathVariable Integer id) {
         if (airportService.deleteById(id)) {
             return ResponseEntity.ok(Map.of("message", "Airport with ID " + id + " was successfully deleted."));
