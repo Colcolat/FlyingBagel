@@ -1,9 +1,9 @@
 -- =====================================================
--- SCRIPT DE DATOS DE EJEMPLO PARA FLYING BAGEL
+-- SCRIPT OF EXAMPLE DATA
 -- =====================================================
 
 -- =====================================================
--- LIMPIAR DATOS PREVIOS Y RESETEAR SECUENCIAS
+-- CLEAN DATA AND RESET SEQUENCES
 -- =====================================================
 DELETE FROM flights;
 DELETE FROM users;
@@ -17,7 +17,7 @@ ALTER SEQUENCE users_id_seq RESTART WITH 1;
 ALTER SEQUENCE flights_id_seq RESTART WITH 1;
 
 -- =====================================================
--- INSERTAR AEROPUERTOS
+-- INSERT AIRPORTS
 -- =====================================================
 INSERT INTO airports (name, code, terminals) VALUES
 ('John F. Kennedy International', 'JFK', 6),
@@ -27,7 +27,7 @@ INSERT INTO airports (name, code, terminals) VALUES
 ('Denver International', 'DEN', 6);
 
 -- =====================================================
--- INSERTAR AEROLÍNEAS
+-- INSERT AIRLINES
 -- =====================================================
 INSERT INTO airlines (name, iata_code, region, is_international, required_document) VALUES
 ('American Airlines', 'AA', 'North America', true, 'Passport'),
@@ -37,17 +37,15 @@ INSERT INTO airlines (name, iata_code, region, is_international, required_docume
 ('Frontier Airlines', 'F9', 'North America', false, 'ID Card');
 
 -- =====================================================
--- INSERTAR USUARIOS
+-- INSERT USERS
 -- =====================================================
 INSERT INTO users (name, email, password, is_premium) VALUES
-('Juan Pérez', 'juan@example.com', 'hashedpass123', false),
-('María García', 'maria@example.com', 'hashedpass456', true),
-('Carlos López', 'carlos@example.com', 'hashedpass789', false),
-('Ana Martínez', 'ana@example.com', 'hashedpass000', true),
-('Pedro Sánchez', 'pedro@example.com', 'hashedpass111', false);
+('Juan Pérez', 'juan@example.com', '$2a$10$G0N4v9Y6J/r1q8vF5h/t.eO.31M.uX6J0q9vF5h/t.eO.31M.uX6J', false),
+('María García', 'maria@example.com', '$2a$10$G0N4v9Y6J/r1q8vF5h/t.eO.31M.uX6J0q9vF5h/t.eO.31M.uX6J', true),
+('Carlos López', 'carlos@example.com', '$2a$10$G0N4v9Y6J/r1q8vF5h/t.eO.31M.uX6J0q9vF5h/t.eO.31M.uX6J', false);
 
 -- =====================================================
--- INSERTAR VUELOS
+-- INSERT FLIGHTS
 -- =====================================================
 INSERT INTO flights (flight_number, origin, destination, price, duration_minutes, departure_date, arrival_date, is_available, status, airline_id) VALUES
 ('AA100', 'JFK', 'LAX', 599.99, 300, '2026-08-01 08:00:00', '2026-08-01 11:00:00', true, 'scheduled', 1),
@@ -59,7 +57,7 @@ INSERT INTO flights (flight_number, origin, destination, price, duration_minutes
 ('DL700', 'LAX', 'JFK', 579.99, 300, '2026-08-04 07:00:00', '2026-08-04 16:00:00', false, 'booked', 2);
 
 -- =====================================================
--- VERIFICAR DATOS INSERTADOS
+-- VERIFY INSERTED DATA
 -- =====================================================
 SELECT 'Aeropuertos' as tabla, COUNT(*) as total FROM airports
 UNION ALL
