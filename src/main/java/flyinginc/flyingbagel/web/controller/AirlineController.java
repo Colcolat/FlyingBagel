@@ -17,11 +17,11 @@ public class AirlineController {
     private final AirlineService airlineService;
 
     public AirlineController(AirlineService airlineService) {
-        this.airlineService = airlineService;
+        this .airlineService = airlineService;
     }
 
     @PostMapping
-    @Operation(description = "Create a new airline")
+    @Operation(summary ="Hola Mundo!", description = "Create a new airline")
     public ResponseEntity<Airline> create(@RequestBody Airline airline) {
         Airline created = airlineService.save(airline);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);

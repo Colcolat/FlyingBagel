@@ -35,7 +35,7 @@ public class AuthController {
             return ResponseEntity.ok(new AuthResponse(token));
 
         } catch (Exception e) {
-            return ResponseEntity.status(401).body("Error en el login: " + e.getMessage());
-        }
+            return ResponseEntity.status(401).body("Login error: " + e.getMessage());
+        }   
     }
 }
