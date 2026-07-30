@@ -40,9 +40,9 @@ INSERT INTO airlines (name, iata_code, region, is_international, required_docume
 -- INSERT USERS
 -- =====================================================
 INSERT INTO users (name, email, password, is_premium) VALUES
-('Juan Pérez', 'juan@example.com', '$2a$10$G0N4v9Y6J/r1q8vF5h/t.eO.31M.uX6J0q9vF5h/t.eO.31M.uX6J', false),
-('María García', 'maria@example.com', '$2a$10$G0N4v9Y6J/r1q8vF5h/t.eO.31M.uX6J0q9vF5h/t.eO.31M.uX6J', true),
-('Carlos López', 'carlos@example.com', '$2a$10$G0N4v9Y6J/r1q8vF5h/t.eO.31M.uX6J0q9vF5h/t.eO.31M.uX6J', false);
+('Juan Pérez', 'juan@example.com', '$2a$10$ihfQjHIBDMOAVLf6Xbss3.ZdkUSwKjDklJWhEwND.1fkPiXvF.RqG', false),
+('María García', 'maria@example.com', '$2a$10$ihfQjHIBDMOAVLf6Xbss3.ZdkUSwKjDklJWhEwND.1fkPiXvF.RqG', true),
+('Carlos López', 'carlos@example.com', '$2a$10$ihfQjHIBDMOAVLf6Xbss3.ZdkUSwKjDklJWhEwND.1fkPiXvF.RqG', false);
 
 -- =====================================================
 -- INSERT FLIGHTS
