@@ -2,6 +2,7 @@ package flyinginc.flyingbagel.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 public class Flight {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
@@ -11,12 +12,17 @@ public class Flight {
     private String destination;
     private Double price;
     private Integer durationMinutes;
+    
+    @Schema(example = "2024-12-01T10:30:00")
     private LocalDateTime departureDate;
+    
+    @Schema(example = "2024-12-01T14:30:00")
     private LocalDateTime arrivalDate;
+    
     private Boolean isAvailable;
     private String status;
 
-
+    @Schema(example = "1")
     private Integer airlineId;
     private String airlineName;
 
